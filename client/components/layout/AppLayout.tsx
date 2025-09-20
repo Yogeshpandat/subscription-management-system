@@ -16,7 +16,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { CreditCard, Home, ListChecks, Bell, Plus, UserCircle2, Moon, Sun } from "lucide-react";
+import {
+  CreditCard,
+  Home,
+  ListChecks,
+  Bell,
+  Plus,
+  UserCircle2,
+  Moon,
+  Sun,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 function NavItems() {
@@ -49,7 +58,9 @@ function ThemeToggle() {
   const [dark, setDark] = useState<boolean>(() => {
     return (
       localStorage.getItem("theme") === "dark" ||
-      (localStorage.getItem("theme") === null && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)
+      (localStorage.getItem("theme") === null &&
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
     );
   });
 
@@ -65,7 +76,12 @@ function ThemeToggle() {
   }, [dark]);
 
   return (
-    <Button variant="outline" size="icon" aria-label="Toggle theme" onClick={() => setDark((v) => !v)}>
+    <Button
+      variant="outline"
+      size="icon"
+      aria-label="Toggle theme"
+      onClick={() => setDark((v) => !v)}
+    >
       {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
     </Button>
   );
@@ -80,7 +96,9 @@ export default function AppLayout() {
             <div className="h-7 w-7 rounded-md bg-gradient-to-br from-violet-500 to-indigo-500" />
             <div className="text-sm font-semibold leading-tight">
               <span className="block">Subscribely</span>
-              <span className="text-xs font-normal text-sidebar-foreground/70">Manage revenue</span>
+              <span className="text-xs font-normal text-sidebar-foreground/70">
+                Manage revenue
+              </span>
             </div>
           </div>
         </SidebarHeader>
@@ -90,7 +108,12 @@ export default function AppLayout() {
         <SidebarSeparator />
         <SidebarFooter>
           <div className="px-2 py-1.5 text-xs text-sidebar-foreground/60">
-            <span className="flex items-center gap-1">Plan <Badge className="px-1.5 py-0.5" variant="secondary">Pro</Badge></span>
+            <span className="flex items-center gap-1">
+              Plan{" "}
+              <Badge className="px-1.5 py-0.5" variant="secondary">
+                Pro
+              </Badge>
+            </span>
           </div>
         </SidebarFooter>
       </Sidebar>
@@ -100,11 +123,18 @@ export default function AppLayout() {
             <SidebarTrigger />
             <div className="relative ml-2 hidden flex-1 items-center md:flex">
               <CreditCard className="absolute left-3 h-4 w-4 text-muted-foreground" />
-              <SidebarInput placeholder="Search customers, plans, invoices..." className="pl-9" />
+              <SidebarInput
+                placeholder="Search customers, plans, invoices..."
+                className="pl-9"
+              />
             </div>
             <div className="ml-auto flex items-center gap-2">
               <ThemeToggle />
-              <Button size="sm" variant="gradient" className="hidden sm:inline-flex">
+              <Button
+                size="sm"
+                variant="gradient"
+                className="hidden sm:inline-flex"
+              >
                 <Plus className="h-4 w-4" />
                 New Plan
               </Button>
@@ -117,11 +147,13 @@ export default function AppLayout() {
             </div>
           </div>
         </header>
-        <main className={cn("container pb-10 pt-6")}> 
+        <main className={cn("container pb-10 pt-6")}>
           <Outlet />
         </main>
         <footer className="border-t py-4 text-center text-sm text-muted-foreground">
-          <div className="container">© {new Date().getFullYear()} Subscribely. All rights reserved.</div>
+          <div className="container">
+            © {new Date().getFullYear()} Subscribely. All rights reserved.
+          </div>
         </footer>
       </SidebarInset>
     </SidebarProvider>
