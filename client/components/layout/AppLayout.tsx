@@ -16,7 +16,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { CreditCard, Home, ListChecks, Bell, Plus, UserCircle2 } from "lucide-react";
+import { CreditCard, Home, ListChecks, Bell, Plus, UserCircle2, Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 
 function NavItems() {
   const location = useLocation();
@@ -41,6 +42,32 @@ function NavItems() {
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
+  );
+}
+
+function ThemeToggle() {
+  const [dark, setDark] = useState<boolean>(() => {
+    return (
+      localStorage.getItem("theme") === "dark" ||
+      (localStorage.getItem("theme") === null && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    );
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (dark) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [dark]);
+
+  return (
+    <Button variant="outline" size="icon" aria-label="Toggle theme" onClick={() => setDark((v) => !v)}>
+      {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+    </Button>
   );
 }
 
@@ -76,7 +103,8 @@ export default function AppLayout() {
               <SidebarInput placeholder="Search customers, plans, invoices..." className="pl-9" />
             </div>
             <div className="ml-auto flex items-center gap-2">
-              <Button size="sm" className="hidden sm:inline-flex">
+              <ThemeToggle />
+              <Button size="sm" variant="gradient" className="hidden sm:inline-flex">
                 <Plus className="h-4 w-4" />
                 New Plan
               </Button>

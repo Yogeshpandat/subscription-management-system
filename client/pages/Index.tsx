@@ -34,7 +34,7 @@ export default function Index() {
               <Upload className="h-4 w-4" />
               Import Customers
             </Button>
-            <Button>
+            <Button variant="gradient">
               <Plus className="h-4 w-4" />
               Create Plan
             </Button>
@@ -69,10 +69,16 @@ export default function Index() {
                 className="w-full h-80"
               >
                 <LineChart data={data as any} margin={{ left: 8, right: 8, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="mrrGradient" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity={0.5} />
+                      <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity={1} />
+                    </linearGradient>
+                  </defs>
                   <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} dy={8} />
                   <YAxis tickLine={false} axisLine={false} width={40} />
-                  <Line type="monotone" dataKey="mrr" stroke="hsl(var(--primary))" strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="mrr" stroke="url(#mrrGradient)" strokeWidth={2} dot={false} />
                   <ChartTooltip content={<ChartTooltipContent />} />
                 </LineChart>
               </ChartContainer>
