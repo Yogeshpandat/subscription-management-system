@@ -66,18 +66,15 @@ export default function Index() {
             <CardContent>
               <ChartContainer
                 config={{ mrr: { label: tab === "churn" ? "Churn %" : "MRR", color: "hsl(var(--primary))" } }}
-                className="w-full"
+                className="w-full h-80"
               >
-                <ResponsiveContainer width="100%" height={320}>
-                  <LineChart data={data as any} margin={{ left: 8, right: 8, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                    <XAxis dataKey="month" tickLine={false} axisLine={false} dy={8} />
-                    <YAxis tickLine={false} axisLine={false} width={40} />
-                    <Line type="monotone" dataKey="mrr" stroke="hsl(var(--primary))" strokeWidth={2} dot={false} />
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                    <ChartLegend content={<ChartLegendContent />} />
-                  </LineChart>
-                </ResponsiveContainer>
+                <LineChart data={data as any} margin={{ left: 8, right: 8, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} dy={8} />
+                  <YAxis tickLine={false} axisLine={false} width={40} />
+                  <Line type="monotone" dataKey="mrr" stroke="hsl(var(--primary))" strokeWidth={2} dot={false} />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                </LineChart>
               </ChartContainer>
             </CardContent>
           </Card>
